@@ -1,2 +1,2 @@
-# http://vbagthar.github.io
+# http://vbagthar.github.io/caloriecal
 Finals project website to calculate calories
