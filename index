@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title> Calorie Calculator </title>
+<meta charset = "utf-8">
+
+<link rel="stylesheet" href="V:/Website Project/style.css" />
+</head>
+
+<body>
+<div id="wrapper"> 
+
+<header> <h1>Calorie Calculator</h1> </header>
+
+<nav class="floatleft">
+
+	<a class="leftnav" href="index.html">Home</a> <br> <br> <br>
+	<a class="leftnav" href="newsletter.html">Newsletter</a> <br> <br> <br>
+	<a class="leftnav" href="contact.html">Contact Us</a> <br> <br> <br> 
+
+	<img class="jog" src="V:\Website Project\image\jogging.gif" 
+	alt="jogging object" height="350px" width="250px">
+
+</nav>
+
+<nav class="floatright">
+
+	<a class="rightnav" href="index.html">Home</a> <br> <br> <br>
+	<a class="rightnav" href="https://www.nhlbi.nih.gov/health/educational/lose_wt/eat/menus_tac_1600.htm" target="_blank">1,600 Calories Diet Plan  </a> <br> <br> <br>
+	<a class="rightnav" href="https://www.nhlbi.nih.gov/health/educational/lose_wt/eat/menus_tac_1200.htm" target="_blank">1,200 Calories Diet Plan  </a> <br> <br> <br>
+	<a class="rightnav" href="https://choosemyplate-prod.azureedge.net/sites/default/files/budget/2WeekMenusAndFoodGroupContent.pdf" target="_blank">Sample Menu</a> <br> <br> <br>
+	
+	<img class="food" src="V:/Website Project/image/veg.gif" 
+	alt="veg food" height="300px" width="200px">
+	
+	<a href= "#top">Back to Top</a>
+
+</nav>
+
+
+<main>
+<h2> Enter the value and calculate your result: </h2>
+<div class="row">
+
+<div class="cleft">
+<form action="" id="form1">
+<fieldset>
+<legend>Daily Calorie Calculator</legend>
+
+<label for="myAge"> Age: </label> 
+	<input type="text" name="age" id="age" maxlength="2" size="5" required><br>
+	
+<label for="myHeight"> Height: </label> 
+	<input type="text" name="feet" id="feet" maxlength="1" size="2" placeholder="feet" required><span class="feet">feet</span> &nbsp; &nbsp;
+	<input type="text" name="inches" id="inches" maxlength="2" size="2" placeholder="inches" required><span class="inches">inches</span><br>
+	
+<label for="myWeight"> Weight: </label> 
+	<input type="text" name="weight" id="weight" maxlength="3" size="2" placeholder="lbs" required><span class="weight">lbs</span><br>
+
+<label for="myActivity"> Activity Level: <label>
+<select required id="activity" name="activity">
+	<option value="none"> Please select your activity</option>
+	<option value="1.2" >Sedentary: little or no exercise</option>
+	<option value="1.375" >Light: exercise 1-3 times/week</option>
+	<option value="1.465" >Moderate: exercise 4-5 times/week</option>
+	<option value="1.55" >Active: daily exercise or intense exercise 3-4 times/week</option>
+	<option value="1.725" >Very Active: intense exercise 6-7 times/week</option>
+	<option value="1.9" >Extra Active: very intense exercise daily, or physical job</option>	
+</select>
+
+
+<input type="button" value="Submit" style="margin-left:120px" onclick="getResult()">
+<input type="reset" value="Reset" style="margin:10px 0px 10px 120px" style="margin-bottom:10px">
+</fieldset>
+<h2> Here is your result: <span id="maleResult"></span> </h2>
+<h2> Here is your result:  <span id="femaleResult"></span> </h2>
+
+<div id="maleResult"></div>
+<div id="femaleResult"></div>
+</form>
+</div>
+
+<script>
+
+
+function getAge()
+{
+	var theForm = document.forms["form1"];
+	var age = theForm.elements["age"];
+	var whatage=0;
+	if(age.value!="")
+	{
+		whatage = parseInt(age.value);
+	}
+	return whatage;
+}
+
+function getFeetHeight()
+{
+	var theForm = document.forms["form1"];
+	var feet = theForm.elements["feet"];
+	var feetheight=0;
+	if(feet.value!="")
+	{
+		feetheight = parseInt(feet.value);
+	}
+	return feetheight;
+}
+
+function getInchesHeight()
+{
+	var theForm = document.forms["form1"];
+	var inches = theForm.elements["inches"];
+	var inchesheight=0;
+	if(inches.value!="")
+	{
+		inchesheight = parseInt(inches.value);
+	}
+	return inchesheight;
+}
+
+function getBothHeight()
+{
+	var bothheight = getFeetHeight() + getInchesHeight();
+	return bothheight;
+}
+
+function getHeight()
+{
+	var height = getBothHeight;
+	return height;
+}
+
+function getWeight()
+{
+	var theForm = document.forms["form1"];
+	var weight = theForm.elements["weight"];
+	var whatweight=0;
+	if(weight.value!="")
+	{
+		whatweight = parseInt(weight.value);
+	}
+	return whatweight;
+}
+
+var activity_level = new Array();
+activity_level["1.2"]=1.2;
+activity_level["1.375"]=1.375;
+activity_level["1.465"]=1.465;
+activity_level["1.55"]=1.55;
+activity_level["1.725"]=1.725;
+activity_level["1.9"]=1.9;
+
+function getActivityLevel()
+{
+	var userActivityLevel=0;
+	var theForm = document.forms["form1"];
+	var selectedLevel = theForm.elements["activity"];
+	
+	userActivityLevel = activity_level[selectedLevel.value];
+	
+	return userActivityLevel;
+}
+
+function getResult()
+{
+	var maleCal = getWeight() + getFeetHeight() - getAge();
+	var femaleCal = getWeight() + getFeetHeight() - getAge();;
+	
+	document.getElementById("maleResult");
+	divobj.style.display='block';
+	divobj.innerHTML = "Result from Male:" +maleCal;
+	
+	document.getElementById("femaleResult");
+	divobj.style.display='block';
+	divobj.innerHTML = "Result from Male:" +femaleCal;
+	
+}
+function test ()
+{
+	var x = 10;
+	x += 5;
+	document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+
+<div class="cright">
+<p style="color:black;"> By calculating your daily calories consumption, you will be able to know how many calories you need to consume in order to mantain your current weight or to
+lose or gain your weight.
+You will be also able to know if you are healthy, overweight or underweight on the based of this calculation. <br> *Kindly enter all coorect values to get the accurate results! </p>
+</div>
+</div>
+
+<div class="clearfix">
+<img class="img1" src="V:/Website Project/image/fitness.jpg" alt="fitness" width="300" height="300">
+<p class="small"> <b> Exercise: </b> 15-30 minutes of elevated heart rate activity. <br>
+<b> Intense exercise: </b> 45-120 minutes of elevated heart rate activity. <br>
+<b> Very intense exercise: </b> 2+ hours of elevated heart rate activity.
+</p>
+<p style="padding-left:60px; padding-bottom:none; font-size:16pt; margin:0px"> Daily calorie needs based on activity level: </p>
+<table class="t1">
+	
+	<tr><td width="400"> Activity level </td><td width="100"> Calorie </td></tr>
+	<tr><td>Sedentary: little or no exercise</td><td>2,060</td></tr>
+	<tr><td>Exercise 1-3 times/week</td><td>2,361</td></tr>
+	<tr><td>Exercise 4-5 times/week	</td><td>2,515</td></tr>
+	<tr><td>Daily exercise or intense exercise 3-4 times/week</td><td>2,661</td></tr>
+	<tr><td>Intense exercise 6-7 times/week	</td><td>2,962</td></tr>
+	<tr><td>Very intense exercise daily, or physical job</td><td>3,262</td></tr>
+	
+</table>
+</div>
+<p style="margin:0px;" class="small">Note:Consuming more calories than mentioned in the table above may lead you to weight gain<p>
+
+<p style="color: #93E2D0; margin-left:30px; font-size:16pt;"><u>Calorie Needs to Lose Weight:</u><br></p>
+<p class="caldes2">There are approximately 3500 calories in a pound of stored body fat. If you subtract 3500 calories each week through diet, exercise or a combination of both, you will
+ lose one pound of body weight. (On average 75% of this is fat, 25% lean tissue) If you create a 7000 calorie deficit you will lose two pounds and so on. The calorie deficit can be
+ achieved either by calorie reduction alone, or by a combination of eating less and doing more. This combination of healthy eating and physical activity is best for achieving and
+ maintianing a healthy weight.</p>
+<p class="caldes2">If you want to lose fat, a useful guideline for lowering your calorie intake is to reduce your calories by at least 500, but not more than 1000 below your maintenance
+ level. For people with only a small amount of weight to lose, 1000 calories is too much. As a guide, the American College of Sports Medicine (ACSM) recommends that calorie levels never
+ drop below 1200 calories per day for women or 1800 calories per day for men. Even these calorie levels are quite low.
+</p>
+<div class="line"></div>
+
+<h2> Fat Intake calculator : </h2>
+
+<div class="row">
+
+<div class="cleft">
+<form>
+<fieldset>
+
+
+<label for="myGender" class="top" required> *Gender: </label> 
+	<input type="radio" name="gender" id="gender" required> Male
+	<input type="radio" name="gender" id="gender"> Female <br>
+
+<label for="myAge"> Age: </label> 
+	<input type="number" name="age" id="age" maxlength="2" size="5" required><br>
+	
+<label for="myHeight"> Height: </label> 
+	<input type="number" name="height" id="height" maxlength="1" size="2" placeholder="feet" required><span class="feet">feet</span> &nbsp; &nbsp;
+	<input type="number" name="height" id="height" maxlength="2" size="2" placeholder="inches" required><span class="inches">inches</span><br>
+	
+<label for="myWeight"> Weight: </label> 
+	<input type="number" name="weight" id="weight" maxlength="3" size="2" placeholder="lbs" required><span class="weight">lbs</span><br>
+
+<label for="myActivity"> Activity Level: <label>
+<select required id="activity" name="activity">
+	<option value=""> Please select your activity</option>
+	<option value="1.2" >Sedentary: little or no exercise</option>
+	<option value="1.375" >Light: exercise 1-3 times/week</option>
+	<option value="1.465" >Moderate: exercise 4-5 times/week</option>
+	<option value="1.55" >Active: daily exercise or intense exercise 3-4 times/week</option>
+	<option value="1.725" >Very Active: intense exercise 6-7 times/week</option>
+	<option value="1.9" >Extra Active: very intense exercise daily, or physical job</option>	
+</select>
+
+
+<input type="submit" value="Submit" style="margin-left:120px">
+<input type="reset" value="Reset" style="margin:10px 0px 10px 120px" style="margin-bottom:10px">
+</fieldset>
+</form>
+</div>
+
+<div class="cright">
+<p style="color:black; margin-top: 1px;"> The Fat Intake Calculator estimates the amount of dietary fat a person should consume on a daily basis. The results are based on an estimation of daily
+ caloric needs determined using the provided information. The calculator also considers the maximum recommended levels of saturated fats a person should consume to reduce risk of 
+ heart disease. </p>
+</div>
+</div>
+<p class="small"> <b> Exercise: </b> 15-30 minutes of elevated heart rate activity. <br>
+<b> Intense exercise: </b> 45-120 minutes of elevated heart rate activity. <br>
+<b> Very intense exercise: </b> 2+ hours of elevated heart rate activity.
+</p>
+
+<p style="color: #ccff99; text-align:center; font-size:18pt;"><u>Daily Fat Intake:</u><br></p>
+
+<p style="color: white; margin-left:30px; font-size:18pt;">Different Types of Fat<br></p>
+
+<p class="caldes2">Fat, along with carbohydrates and proteins, is one of three macronutrients that provide the energy necessary for a person's metabolic system to function,
+ and can be acquired through consuming various foods. There are numerous types of dietary fat including saturated fat, trans fat, monounsaturated fat, polyunsaturated fat,
+ and omega-3 fatty acids. While dietary fat is essential to proper body function, excess dietary fat leads to weight gain, and excess weight is linked to poor health outcomes.</p>
+
+<p style="color: white; margin-left:30px; font-size:18pt;">Unhealthy Dietary Fat<br></p>
+
+<p style="color: white; margin-left:30px; font-size:16pt;">Saturated Fat<br></p>
+
+<p class="caldes2">Saturated fat is a type of dietary fat. It is one of the unhealthy fats, along with trans fat. These fats are most often solid at room temperature. 
+Foods like butter, palm and coconut oils, cheese, and red meat have high amounts of saturated fat.<br>
+Too much saturated fat in your diet can lead to heart disease and other health problems.
+<a style="color:#6FE3EB;" href="https://medlineplus.gov/ency/patientinstructions/000838.htm" target="_blank">https://medlineplus.gov/ency/patientinstructions/000838.htm</a> </p>
+
+<p style="color: white; margin-left:30px; font-size:16pt;">Trans Fat<br></p>
+
+<p class="caldes2">Trans fat is a type of dietary fat. Of all the fats, trans fat is the worst for your health. Too much trans fat in your diet increases your risk for heart
+ disease and other health problems.<br>
+Trans fats are made when food makers turn liquid oils into solid fats, like shortening or margarine. Trans fats can be found in many fried, "fast", packaged, or processed foods.
+<a style="color:#6FE3EB;" href="https://medlineplus.gov/ency/patientinstructions/000786.htm" target="_blank">https://medlineplus.gov/ency/patientinstructions/000786.htm</a> </p>
+
+<p style="color: white; margin-left:30px; font-size:16pt;">Healthier Dietary Fat<br></p>
+
+<p class="caldes2">Monounsaturated and polyunsaturated fat are two types of unsaturated fat that are typically found in a variety of foods and oils, with polyunsaturated 
+fat more commonly being found in plant-based foods and oils. Studies have shown that both of these types of unsaturated fat, in small amounts, can help reduce LDL cholesterol,
+ while potentially increasing HDL cholesterol levels in the bloodstream. Furthermore, omega-3 fatty acids, a type of polyunsaturated fat that is found in certain fish, has been
+ found to decrease the risk of coronary artery disease.<br>
+ <a style="color:#6FE3EB;" href="https://www.accessdata.fda.gov/scripts/interactivenutritionfactslabel/mono-and-poly-fat.html" target="_blank">
+ https://www.accessdata.fda.gov/scripts/interactivenutritionfactslabel/mono-and-poly-fat.html</a></p>
+
+<p class="caldes2">So far, there is no golden rule guiding daily fat intake. Generally, some fat intake, particularly intake of unsaturated fats, can have beneficial effects on the 
+human body. Children especially need some fat in their diets to be healthy. It's generally recommended that a child drink whole milk instead of low fat or no-fat milk once they stop 
+breastfeeding. However, any type of fat, including these healthier dietary fats, can have negative effects when consumed in excess. Below are some guidelines regarding the amount and
+types of fat a person should consume.</p>
+
+<ul style="color:#ccff99; font-type:Calibri; font-size:14pt;">
+	
+	<li>Consume less than 10% of daily caloric needs in the form of saturated fats. Limiting consumption to less than 7% has been shown to reduce the risk of heart disease.</li>
+	<li>Replace saturated fats with unsaturated fats if possible.</li>
+	<li>Minimize consumption of trans fats.</li>
+	<li>Consume less than 300 mg of dietary cholesterol each day.</li>
+	
+</ul>
+<div class="clearfix">
+<img class="img1" src="V:/Website Project/image/eatavoid.jpg" alt="what to eat what to avoid" width="400" height="300">
+<p style="padding-left:60px; padding-bottom:none; font-size:16pt;"> Dietary intake for adults aged 20 and over </p>
+<table class="t1">
+	
+	<tr><td width="75"> <td width="200"></td> </td><td width="75"> % of kilocalories </td></tr>
+	<tr><td> Men </td> <td> Mean Fat </td> <td> 33.6% </td></tr>
+	<tr><td> Women </td><td> Mean Fat </td><td> 33.7% </td></tr>
+	<tr><td> Men </td> <td> Mean carbohydrate </td> <td> 47.4% </td></tr>
+	<tr><td> Women </td><td> Mean carbohydrate </td><td> 49.6% </td></tr>
+	<tr><td> Men </td> <td> Mean Protein </td> <td> 16.1% </td></tr>
+	<tr><td> Women </td><td> Mean Protein </td><td> 15.6% </td></tr>
+	
+</table>
+<a style="color:#6FE3EB; margin-left:60px;" href="https://www.cdc.gov/nchs/fastats/diet.htm" target="_blank">https://www.cdc.gov/nchs/fastats/diet.htm</a>
+</div>
+
+<div class="row" style="padding-bottom:10px">
+	
+	<div class="col1">
+	<p style="text-align:center; margin:0px; color:black;"> <b><u>Eat Healthy </b></u></p>
+	<img class="img1" src="V:/Website Project/image/eatright.jpg" alt="eat right" width="130px" height="130px">
+	<p style="color:#000000; margin-left: 5px;"> To lose weight, it's important to make lifestyle changes with a focus on reducing calories from food and beverages, a healthy eating plan, and portion control. 
+		This section will provide you with guidance... 
+		<b><a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/eat/index.htm" target="_blank">read more</b> </a> </p>
+	</div>
+	
+	<div class="col2">
+	<p style="text-align:center; margin:0px; color:black;"> <b><u>Control Weight </b></u></p>
+	<img class="img1" src="V:/Website Project/image/weight.jpg" alt="weight control" width="130px" height="130px">
+	<p style="color:#000000; margin-left: 5px;"> Changing the way you approach weight loss can help you be more successful at weight management. Most people who are trying to 
+	lose weight focus on just the goal of... 
+		<b><a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/control.htm" target="_blank">read more </b></a> </p>
+	</div>
+	
+	<div class="col3">
+	<p style="text-align:center; margin:0px; color:black;"> <b><u>Key Recommendations</b></u></p>
+	<img class="img1" src="V:/Website Project/image/recom.jpg" alt="Recommendations" width="130px" height="130px">
+	<p style="color:#000000; margin-left: 5px;"> The combination of a reduced-calorie diet and increased physical activity is recommended, because it produces weight loss that also... 
+		<b><a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/recommen.htm" target="_blank">read more </b></a> </p>
+	</div>
+	
+</div>
+
+</main>
+
+
+<footer>
+
+Vickykumar Bagthariya <br>
+Chattahoochee Technical College<br>
+Web Designing CIST 1510<br>
+Marietta, GA 30060, USA<br><br>
+
+</footer>
+
+</div>
+</body>
+</html>
